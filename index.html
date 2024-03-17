@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Wialon Playground - Show nearby units</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="//hst-api.wialon.com/wsdk/script/wialon.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+ 
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+
+  <body>
+
+
+
+    <!-- load map -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+ <div id="inf">
+  <div id="autor">автор Пальгуй Сергій  saliery22@gmail.com  2023р </div> 
+  <button id='load'>завантажити архівні дані    </button>-натисніть після аварійного вимкнення/закриття програми<button id='cler'>очистити</button> - очистити архівні дані
+ 
+  </div>  
+ <div id="map"></div>
+ <div id="grafik">
+  
+   <div id="chart1"></div>
+   <div id="chart2"></div>
+   
+   
+ </div>
+      
+ <div id="roww">
+  <table id="marshrut1"></table>
+     
+
+   <button id='v1'>перелив</button><button id='v2'>злив у русі</button><button id='v3'>витрата на холостому ході</button><button id='v6'>фактичний рівень пального не змінився</button><button id='v7'>рівень пального повернувся до норми</button><button id='v8'>некоректна робота ДРП</button>
+   <input id='v4' type='text' placeholder='свій варіант'><button id='v5'>додати</button>
+ </div>
+
+<div class='wrap'>
+    <table id="marshrut">
+     
+
+    </table>
+</div>
+   <p><input id='fromtime' type='text' placeholder='date'><button id='gooo'>розрахунок</button><button id='goooo'>копіювати таблицю в буфер</button></p>    
+
+
+
+
+
+
+
+    <div id="log"></div>
+   
+  
+    <script src="sliv.js"></script>
+
+
+
+
+  </body>
+
+</html>
