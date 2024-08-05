@@ -563,7 +563,8 @@ function drawChart() {
      
      var y = parseFloat(data_unit[i][0].split(',')[0]);
      var x = parseFloat(data_unit[i][0].split(',')[1]);
-
+     if(!y||!x){y=0;x=0;}
+    
      pointsliv.setLatLng([y, x]);
       map.setView([y, x], 14);
      
