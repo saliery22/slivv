@@ -278,7 +278,7 @@ function showReportResult(result,idd){ // show result after report execute
                   break;
                   } 
               }
-              if(idd.getName()=='ДРП ККЗ'|| idd.getName()=='ДРП Райгородок'|| idd.getName()=='Бензин ККЗ Ультразвук'){
+              if(idd.getName()=='ДРП ККЗ'|| idd.getName()=='ДРП Райгородок'|| idd.getName()=='Бензин ККЗ Ультразвук'|| idd.getName()=='РЕЗЕРВУАР ККЗ новий'){
                   time1=99;
                   }  
           if(time1!=99){
