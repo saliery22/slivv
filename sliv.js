@@ -3,13 +3,8 @@
 let TOKEN = '4d2e59443e9e64c89c5725f14c042fbd3D91C94CFE94B0EDAD6EAEC75C6C8F4A428020D3';
 let data=[];
 let ftp_id = 601000441; 
+let id;
 let redy =true
-
-
-
-
-
-
 
 
 
@@ -30,13 +25,12 @@ $(document).ready(function () {
 
 
 
-
-
-
   function setResult(label, result) {
     label.textContent = result.data;
-    if(redy){
+    if(redy && id!=result.data){
       redy=false;
+      id=result.data;
+      console.log(result)
       document.body.style.backgroundColor = "#90EE90";
       audio.play();
       setTimeout(function(){document.body.style.backgroundColor = 'white'; redy=true},500);
@@ -61,7 +55,7 @@ $(document).ready(function () {
 
   const scanner = new QrScanner(video, result => setResult(camQrResult, result), {
     onDecodeError: error => {
-        camQrResult.textContent = error;
+       console.log(error);
     },
     highlightScanRegion: true,
     highlightCodeOutline: true,
@@ -71,16 +65,5 @@ scanner.start();
 
 
   });
-
-
-
-
-
-
-
-
-
-
-
 
 
