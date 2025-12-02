@@ -11,6 +11,12 @@ let redy =true
 
 // execute when DOM ready
 $(document).ready(function () {
+
+
+  const video = document.getElementById('qr-video');
+  const camQrResult = document.getElementById('cam-qr-result');
+
+
   wialon.core.Session.getInstance().initSession("https://hst-api.wialon.eu",null,0x800);
   wialon.core.Session.getInstance().loginToken(TOKEN, "", 
     function (code) { 
@@ -20,8 +26,6 @@ $(document).ready(function () {
 
 
 
-  const video = document.getElementById('qr-video');
-  const camQrResult = document.getElementById('cam-qr-result');
 
 
 
@@ -30,10 +34,9 @@ $(document).ready(function () {
     if(redy && id!=result.data){
       redy=false;
       id=result.data;
-      console.log(result)
       document.body.style.backgroundColor = "#90EE90";
       audio.play();
-      setTimeout(function(){document.body.style.backgroundColor = 'white'; redy=true},500);
+      setTimeout(function(){document.body.style.backgroundColor = 'white'; redy=true},1000);
     }
 
   // let d = Date.now();
