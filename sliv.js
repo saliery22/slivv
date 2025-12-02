@@ -3,7 +3,7 @@
 let TOKEN = '4d2e59443e9e64c89c5725f14c042fbd3D91C94CFE94B0EDAD6EAEC75C6C8F4A428020D3';
 let data=[];
 let ftp_id = 601000441; 
-let id;
+let id = [];
 let redy =true
 
 
@@ -31,9 +31,16 @@ $(document).ready(function () {
 
   function setResult(label, result) {
     label.textContent = result.data;
-    if(redy && id!=result.data){
+    let dubl=false;
+    for(let i = 0; i < id.length; i++){
+        if(id[i]==result.data){
+          dubl=true;
+          break;
+        }
+    }
+    if(redy && dubl==false){
       redy=false;
-      id=result.data;
+      id.push(result.data)
       document.body.style.backgroundColor = "#90EE90";
       audio.play();
       setTimeout(function(){document.body.style.backgroundColor = 'white'; redy=true},1000);
