@@ -21,7 +21,7 @@ $(document).ready(function () {
   wialon.core.Session.getInstance().loginToken(TOKEN, "", 
     function (code) { 
       if (code){ camQrResult = wialon.core.Errors.getErrorText(code); return; }
-      camQrResult = 'Зеднання з ККЗ - успішно';
+      camQrResult.textContent = 'Зеднання з ККЗ - успішно';
     });
 
 
@@ -38,12 +38,30 @@ $(document).ready(function () {
           break;
         }
     }
-    if(redy && dubl==false){
+    if(redy){
+      if(dubl){
       redy=false;
       id.push(result.data)
-      document.body.style.backgroundColor = "#90EE90";
+      document.body.style.backgroundColor = "#baffeeff";
       audio.play();
-      setTimeout(function(){document.body.style.backgroundColor = 'white'; redy=true},1000);
+      setTimeout(function(){
+        document.body.style.backgroundColor = 'white'; 
+        redy=true;
+      },1000);
+      }else{
+
+
+      redy=false;
+      id.push(result.data)
+      document.body.style.backgroundColor = "#00fa21ff";
+      audio.play();
+      setTimeout(function(){
+        document.body.style.backgroundColor = 'white'; 
+        redy=true;
+      },1000);
+
+      
+      }
     }
 
   // let d = Date.now();
