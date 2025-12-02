@@ -43,7 +43,6 @@ $(document).ready(function () {
       redy=false;
       id.push(result.data)
       document.body.style.backgroundColor = "#baffeeff";
-      audio.play();
       setTimeout(function(){
         document.body.style.backgroundColor = 'white'; 
         redy=true;
