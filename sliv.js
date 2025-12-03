@@ -6,7 +6,7 @@ let ftp_id = 601000441;
 let id = [];
 let redy =true
 
-
+let sss = "00001";
 
 
 // execute when DOM ready
@@ -21,7 +21,7 @@ $(document).ready(function () {
   wialon.core.Session.getInstance().loginToken(TOKEN, "", 
     function (code) { 
       if (code){ camQrResult = wialon.core.Errors.getErrorText(code); return; }
-      camQrResult.textContent = 'Зеднання з ККЗ - успішно';
+      camQrResult.textContent = 'Зєднання з ККЗ - успішно';     
     });
 
 
@@ -49,6 +49,13 @@ $(document).ready(function () {
       },1000);
       }else{
 
+        html2canvas(document.getElementById('video-container')).then(canvas => {
+    // Открывает изображение в новой вкладке или инициирует его скачивание
+    const link = document.createElement('a');
+    link.download = result.data+'.png'; // Имя файла
+    link.href = canvas.toDataURL();
+    link.click();
+});
 
       redy=false;
       id.push(result.data)
