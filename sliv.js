@@ -58,17 +58,23 @@ $(document).ready(function () {
 // });
       let d = Date.now();
       let t = "||"+d+"|"+result.data+"\n";
-      write_jurnal(ftp_id,'Options.txt',t,function (data) { 
-      redy=false;
+
+     let remotee= wialon.core.Remote.getInstance(); 
+     remotee.remoteCall('file/write',{'itemId':ftp_id,'storageType':1,'path':'//sklad/Options.txt',"content":t,"writeType":1,'contentType':0},function (error) {
+     if (error) {
+     redy=true;
+     return;
+      }else{
+      redy=true;
       id.push(result.data)
       document.body.style.backgroundColor = "#00fa21ff";
       audio.play();
-      setTimeout(function(){
+       setTimeout(function(){
         document.body.style.backgroundColor = 'white'; 
-        redy=true;
       },1000);
-    });
-      
+      return;
+     }
+      }); 
       }
     }
 
