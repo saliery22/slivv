@@ -6,7 +6,7 @@ let ftp_id = 601000441;
 let id = [];
 let redy =true
 
-let sss = "00001";
+
 
 
 // execute when DOM ready
@@ -56,7 +56,9 @@ $(document).ready(function () {
 //     link.href = canvas.toDataURL();
 //     link.click();
 // });
-      write_jurnal(ftp_id,'Options.txt',function (data) { 
+      let d = Date.now();
+      let t = "||"+d+"|"+result.data+"\n";
+      write_jurnal(ftp_id,'Options.txt',t,function (data) { 
       redy=false;
       id.push(result.data)
       document.body.style.backgroundColor = "#00fa21ff";
