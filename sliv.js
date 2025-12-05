@@ -49,14 +49,14 @@ $(document).ready(function () {
       },1000);
       }else{
 
-        html2canvas(document.getElementById('video-container')).then(canvas => {
-    // Открывает изображение в новой вкладке или инициирует его скачивание
-    const link = document.createElement('a');
-    link.download = result.data+'.png'; // Имя файла
-    link.href = canvas.toDataURL();
-    link.click();
-});
-
+//         html2canvas(document.getElementById('video-container')).then(canvas => {
+//     // Открывает изображение в новой вкладке или инициирует его скачивание
+//     const link = document.createElement('a');
+//     link.download = result.data+'.png'; // Имя файла
+//     link.href = canvas.toDataURL();
+//     link.click();
+// });
+      write_jurnal(ftp_id,'Options.txt',function (data) { 
       redy=false;
       id.push(result.data)
       document.body.style.backgroundColor = "#00fa21ff";
@@ -65,7 +65,7 @@ $(document).ready(function () {
         document.body.style.backgroundColor = 'white'; 
         redy=true;
       },1000);
-
+    });
       
       }
     }
@@ -101,3 +101,14 @@ scanner.start();
   });
 
 
+function write_jurnal(id,file_name,content,calbek){
+  let remotee= wialon.core.Remote.getInstance(); 
+  remotee.remoteCall('file/write',{'itemId':id,'storageType':1,'path':'//sklad/'+file_name,"content":content,"writeType":1,'contentType':0},function (error) {
+    if (error) {
+    return;
+    }else{
+    calbek();
+    return;
+   }
+}); 
+}
