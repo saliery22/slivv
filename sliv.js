@@ -56,6 +56,7 @@ $(document).ready(function () {
 //     link.href = canvas.toDataURL();
 //     link.click();
 // });
+      redy=false;
       let d = Date.now();
       let t = "||"+d+"|"+result.data+"\n";
 
