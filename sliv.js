@@ -60,6 +60,7 @@ $(document).ready(function () {
               document.body.style.backgroundColor = '#ffffff'; 
               redy = true;
               if (typeof qrScanner !== 'undefined') qrScanner.start(); // РАЗМОРОЗКА
+              label.textContent = '';
           }, 500); // Увеличил время паузы для удобства
       } else {
           // Логика отправки в Wialon
