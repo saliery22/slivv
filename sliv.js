@@ -32,6 +32,19 @@ $(document).ready(function () {
 
   function setResult(label, result) {
     label.textContent = result.data;
+    let inputValue = $("#user-input").val().trim();
+    
+    if (!inputValue) {
+      $input.addClass('highlight'); // Добавляем подсветку
+      // Вибрация (если мобильный)
+      if (navigator.vibrate) navigator.vibrate([50, 50, 50]);
+      setTimeout(() => {
+          $input.removeClass('highlight'); // Убираем через секунду
+      }, 1000);
+      return; 
+  }
+
+
     let dubl=false;
     for(let i = 0; i < id.length; i++){
         if(id[i]==result.data+inputValue){
@@ -59,7 +72,6 @@ $(document).ready(function () {
 // });
       redy=false;
       let d = Date.now();
-      let inputValue = $("#user-input").val().trim();
       let t = "||"+d+"|"+result.data+"|"+inputValue+"\n";
 
      let remotee= wialon.core.Remote.getInstance(); 
