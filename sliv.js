@@ -1,6 +1,6 @@
 
 
-let TOKEN = '4d2e59443e9e64c89c5725f14c042fbd3D91C94CFE94B0EDAD6EAEC75C6C8F4A428020D3';
+let TOKEN = '4d2e59443e9e64c89c5725f14c042fbdCA9CB0960781B27C57D1CB36A91BDACF276928E6';
 let data=[];
 let ftp_id = 601000441; 
 let id = [];
@@ -21,8 +21,8 @@ $(document).ready(function () {
   wialon.core.Session.getInstance().initSession("https://hst-api.wialon.eu",null,0x800);
   wialon.core.Session.getInstance().loginToken(TOKEN, "", 
     function (code) { 
-      if (code){ camQrResult = wialon.core.Errors.getErrorText(code); return; }
-      camQrResult.textContent = 'Зєднання з ККЗ - успішно';     
+      if (code){ camQrResult.textContent = wialon.core.Errors.getErrorText(code); return; }
+      camQrResult.textContent = 'Зєднання з ККЗ - успішно'; 
     });
 
 
