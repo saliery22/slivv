@@ -58,7 +58,7 @@ $(document).ready(function () {
       id.push(result.data+inputValue)
       document.body.style.backgroundColor = "#baffeeff";
       setTimeout(function(){
-        document.body.style.backgroundColor = '#0a0a0b'; 
+        document.body.style.backgroundColor = '#ffffff'; 
         redy=true;
       },1000);
       }else{
@@ -85,7 +85,7 @@ $(document).ready(function () {
       document.body.style.backgroundColor = "#00fa21ff";
       audio.play();
        setTimeout(function(){
-        document.body.style.backgroundColor = '#0a0a0b'; 
+        document.body.style.backgroundColor = '#ffffff'; 
       },1000);
       return;
      }
