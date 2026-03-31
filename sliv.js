@@ -32,6 +32,7 @@ $(document).ready(function () {
 
   function setResult(label, result) {
     label.textContent = result.data;
+    let $input = $("#user-input");
     let inputValue = $("#user-input").val().trim();
     
     if (!inputValue) {
