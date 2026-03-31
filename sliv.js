@@ -30,87 +30,70 @@ $(document).ready(function () {
 
 
 
-  function setResult(label, result) {
-    label.textContent = result.data;
-    let $input = $("#user-input");
-    let inputValue = $("#user-input").val().trim();
-    
-    if (!inputValue) {
-      $input.addClass('highlight'); // Добавляем подсветку
-      // Вибрация (если мобильный)
-      if (navigator.vibrate) navigator.vibrate([50, 50, 50]);
-      setTimeout(() => {
-          $input.removeClass('highlight'); // Убираем через секунду
-      }, 1000);
-      return; 
-  }
-
-
-    let dubl=false;
-    for(let i = 0; i < id.length; i++){
-        if(id[i]==result.data+inputValue){
-          dubl=true;
-          break;
-        }
-    }
-    if(redy){
-      if(dubl){
-      redy=false;
-      id.push(result.data+inputValue)
-      document.body.style.backgroundColor = "#baffeeff";
-      setTimeout(function(){
-        document.body.style.backgroundColor = '#ffffff'; 
-        redy=true;
-      },1000);
-      }else{
-
-//         html2canvas(document.getElementById('video-container')).then(canvas => {
-//     // Открывает изображение в новой вкладке или инициирует его скачивание
-//     const link = document.createElement('a');
-//     link.download = result.data+'.png'; // Имя файла
-//     link.href = canvas.toDataURL();
-//     link.click();
-// });
-      redy=false;
-      let d = Date.now();
-      let t = "||"+d+"|"+result.data+"|"+inputValue+"\n";
-
-     let remotee= wialon.core.Remote.getInstance(); 
-     remotee.remoteCall('file/write',{'itemId':ftp_id,'storageType':1,'path':'//sklad/Options.txt',"content":t,"writeType":1,'contentType':0},function (error) {
-     if (error) {
-     redy=true;
-     return;
-      }else{
-      redy=true;
-      id.push(result.data+inputValue)
-      document.body.style.backgroundColor = "#00fa21ff";
-      audio.play();
-       setTimeout(function(){
-        document.body.style.backgroundColor = '#ffffff'; 
-      },1000);
-      return;
-     }
-      }); 
+    function setResult(label, result) {
+      // Если сканер уже в режиме ожидания (обработки), выходим
+      if (!redy) return;
+  
+      let $input = $("#user-input");
+      let inputValue = $input.val().trim();
+      
+      // Проверка на пустой инпут
+      if (!inputValue) {
+          $input.addClass('highlight');
+          if (navigator.vibrate) navigator.vibrate([50, 50, 50]);
+          setTimeout(() => $input.removeClass('highlight'), 1000);
+          return; 
       }
-    }
-
-  // let d = Date.now();
-  // let t = result.data;
-  // let remotee= wialon.core.Remote.getInstance(); 
-  // remotee.remoteCall('file/write',{'itemId':ftp_id,'storageType':1,'path':'//sklad/util.txt',"content":bufer,"writeType":1,'contentType':0},function (error,data) {
-  //   if (error) {
-  //     label.textContent = wialon.core.Errors.getErrorText(error);
-  //   }else{
-  //     document.body.style.backgroundColor = "#90EE90";
-  //     msg('відправлено в журнал');
-  //   }
-  //   });
-    
- 
-
-
-}
-
+  
+      let dubl = id.includes(result.data + inputValue);
+  
+      // ОСТАНАВЛИВАЕМ СКАНЕР (заморозка картинки)
+      if (typeof qrScanner !== 'undefined') qrScanner.stop();
+      redy = false; 
+  
+      label.textContent = result.data;
+  
+      if (dubl) {
+          // Логика для дубликата
+          document.body.style.backgroundColor = "#baffeeff";
+          setTimeout(function() {
+              document.body.style.backgroundColor = '#ffffff'; 
+              redy = true;
+              if (typeof qrScanner !== 'undefined') qrScanner.start(); // РАЗМОРОЗКА
+          }, 500); // Увеличил время паузы для удобства
+      } else {
+          // Логика отправки в Wialon
+          let d = Date.now();
+          let t = "||" + d + "|" + result.data + "|" + inputValue + "\n";
+  
+          let remotee = wialon.core.Remote.getInstance(); 
+          remotee.remoteCall('file/write', {
+              'itemId': ftp_id, 
+              'storageType': 1, 
+              'path': '//sklad/Options.txt',
+              "content": t, 
+              "writeType": 1, 
+              'contentType': 0
+          }, function (error) {
+              if (error) {
+                  redy = true;
+                  if (typeof qrScanner !== 'undefined') qrScanner.start();
+                  return;
+              } else {
+                  id.push(result.data + inputValue);
+                  document.body.style.backgroundColor = "#00fa21ff";
+                  if (typeof audio !== 'undefined') audio.play();
+                  
+                  setTimeout(function() {
+                      document.body.style.backgroundColor = '#ffffff';
+                      redy = true;
+                      if (typeof qrScanner !== 'undefined') qrScanner.start(); // РАЗМОРОЗКА
+                      $input.val(""); // Очистка после успеха
+                  }, 500);
+              }
+          }); 
+      }
+  }
   const scanner = new QrScanner(video, result => setResult(camQrResult, result), {
     onDecodeError: error => {
        console.log(error);
