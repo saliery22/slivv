@@ -88,8 +88,8 @@ $(document).ready(function () {
                       document.body.style.backgroundColor = '#ffffff';
                       redy = true;
                       if (typeof qrScanner !== 'undefined') qrScanner.start(); // РАЗМОРОЗКА
-                      $input.val(""); // Очистка после успеха
-                  }, 500);
+                      camQrResult.textContent = ''; // Очистка после успеха
+                  }, 1000);
               }
           }); 
       }
